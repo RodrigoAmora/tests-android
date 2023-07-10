@@ -22,13 +22,13 @@ class TestsProduto {
 
     @Test
     fun aoCriarUmProdutoComValorErradoOValorDeveriaSerInvalido() {
-        val produtoValido = Produto(
+        val produtoInvalido = Produto(
             nome = "Limão",
             descricao = "Limão Siciliano",
             valor = BigDecimal("-3.50")
         )
 
-        val valorEhValido = produtoValido.valorValido
+        val valorEhValido = produtoInvalido.valorValido
 
         Assert.assertEquals(false, valorEhValido)
     }
@@ -39,6 +39,19 @@ class TestsProduto {
             nome = "Limão",
             descricao = "Limão Siciliano",
             valor = BigDecimal("777.99")
+        )
+
+        val valorEhValido = produtoInvalido.valorValido
+
+        Assert.assertEquals(false, valorEhValido)
+    }
+
+    @Test
+    fun aoCriarUmProdutoComValorIgualZero() {
+        val produtoInvalido = Produto(
+            nome = "Limão",
+            descricao = "Limão Siciliano",
+            valor = BigDecimal("0.0")
         )
 
         val valorEhValido = produtoInvalido.valorValido
