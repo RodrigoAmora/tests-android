@@ -5,12 +5,19 @@ import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
-import br.com.alura.orgs.ui.activity.FormularioCadastroUsuarioActivity
+import androidx.test.platform.app.InstrumentationRegistry
+import br.com.alura.orgs.database.AppDatabase
 import br.com.alura.orgs.ui.activity.FormularioProdutoActivity
 import br.com.alura.orgs.ui.activity.ListaProdutosActivity
+import org.junit.Before
 import org.junit.Test
 
-class ProdutoTest {
+class ProdutoActivityTest {
+
+    @Before
+    fun preparaAmbiente() {
+        AppDatabase.instancia(InstrumentationRegistry.getInstrumentation().targetContext).clearAllTables()
+    }
 
     @Test
     fun deveMostrarONomeDoAplicativo() {
@@ -24,13 +31,18 @@ class ProdutoTest {
     fun deveMostrarCamposNecessariosParaCriarUmProduto() {
         ActivityScenario.launch(FormularioProdutoActivity::class.java)
         Espresso
-            .onView(ViewMatchers.withId(R.id.activity_formulario_produto_nome)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+            .onView(ViewMatchers.withId(R.id.activity_formulario_produto_nome)).check(
+                ViewAssertions.matches(
+                    ViewMatchers.isDisplayed()))
         Espresso
-            .onView(ViewMatchers.withId(R.id.activity_formulario_produto_descricao)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+            .onView(ViewMatchers.withId(R.id.activity_formulario_produto_descricao)).check(
+                ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso
-            .onView(ViewMatchers.withId(R.id.activity_formulario_produto_valor)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+            .onView(ViewMatchers.withId(R.id.activity_formulario_produto_valor)).check(
+                ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso
-            .onView(ViewMatchers.withId(R.id.activity_formulario_produto_botao_salvar)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+            .onView(ViewMatchers.withId(R.id.activity_formulario_produto_botao_salvar)).check(
+                ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     @Test
